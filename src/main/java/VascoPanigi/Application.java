@@ -5,10 +5,7 @@ import VascoPanigi.entities.Book;
 import VascoPanigi.entities.Catalogue;
 import VascoPanigi.entities.Magazine;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Application {
@@ -20,33 +17,89 @@ public class Application {
     public static void main(String[] args) {
         initializeCatalogue();
 
-        // ---------------------------------catalogue visualization----------------------------------
-        for (Catalogue item : catalogue) {
-            printCatalogueItemDetails(item);
+        System.out.println("Welcome to our store! :D");
+        System.out.println();
 
-            System.out.println();
+        while (true) {
+            System.out.println("Which operation do you wish to perform?");
+            System.out.println("1-See our catalogue, 2-Generate an element, 3-remove with ISBN, 4-search with ISBN, 5-search for publication year, 6-search by author");
+            System.out.println("Type 0 to exit.");
+
+
+            try {
+                int userChoice = scanner.nextInt();
+                scanner.nextLine();
+
+
+                switch (userChoice) {
+                    case 0:
+                        System.out.println("See you space cowboy!");
+                        scanner.close();
+                        return;
+                    case 1:
+                        System.out.println("This is our catalogue.");
+                        for (Catalogue item : catalogue) {
+                            printCatalogueItemDetails(item);
+                            System.out.println();
+                        }
+                        System.out.println();
+                        break;
+                    case 2:
+                        addItem();
+                        break;
+                    case 3:
+                        removeItemWithIsbn();
+                        break;
+                    case 4:
+                        searchItemWithIsbn();
+                        break;
+                    case 5:
+                        searchByPublicationYear();
+                        break;
+                    case 6:
+                        searchByAuthor();
+                    default:
+                        System.out.println("Invalid choice, try again.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
         }
-        //---------------------------------add element-------------------------------------------
-        Magazine magazine = new Magazine(Catalogue.generateTotalPages(), Catalogue.generateYear(), Catalogue.generateTitle(), Catalogue.generateIsbn(), Magazine.generatePeriodicity());
-        Book book = new Book(Catalogue.generateTotalPages(), Catalogue.generateYear(), Catalogue.generateTitle(), Catalogue.generateIsbn(), Book.generateGenre(), Book.generateAuthor());
 
-        addItem(magazine);
-        addItem(book);
+
+        // ---------------------------------catalogue initialization----------------------------------
+
+
+//        //---------------------------------add element-------------------------------------------
+//        THE FOLLOWING CODE DOESNT WORK ANYMORE CUZ I DELETED THE ARGUMENT IN THE ADDITEM CLASS
+//        Magazine magazine = new Magazine(Catalogue.generateTotalPages(), Catalogue.generateYear(), Catalogue.generateTitle(), Catalogue.generateIsbn(), Magazine.generatePeriodicity());
+//        Book book = new Book(Catalogue.generateTotalPages(), Catalogue.generateYear(), Catalogue.generateTitle(), Catalogue.generateIsbn(), Book.generateGenre(), Book.generateAuthor());
+//
+//        addItem(magazine);
+//        addItem(book);
+//
 
         //---------------------------------remove with ISBN-------------------------------------------
 
 
-        removeItemWithIsbn();
+//        removeItemWithIsbn();
 
         //---------------------------------search with ISBN-------------------------------------------
-        searchItemWithIsbn();
+//        searchItemWithIsbn();
 
         //---------------------------------search for Year-------------------------------------------
 
-        searchByPublicationYear();
+//        searchByPublicationYear();
+
+        //---------------------------------search by author-------------------------------------------
+
+//        searchByAuthor();
+
+        //---------------------------------UX optimization-------------------------------------------
 
 
-        scanner.close();
     }
 
     public static void initializeCatalogue() {
@@ -55,6 +108,7 @@ public class Application {
 
         catalogue.addAll(books);
         catalogue.addAll(magazines);
+
     }
 
     public static void generateBooks() {
@@ -71,8 +125,43 @@ public class Application {
         }
     }
 
-    public static void addItem(Catalogue item) {
-        catalogue.add(item);
+    public static void addItem() {
+
+        while (true) {
+            System.out.println("Which item do you wish to add? Press 0 to exit the operation.");
+            System.out.println("1-book, 2-magazine");
+
+            try {
+                int userChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                if (userChoice != 0) {
+                    switch (userChoice) {
+                        case 1:
+                            Book book = new Book(Catalogue.generateTotalPages(), Catalogue.generateYear(), Catalogue.generateTitle(), Catalogue.generateIsbn(), Book.generateGenre(), Book.generateAuthor());
+                            catalogue.add(book);
+                            System.out.println("Book successfully added.");
+                            System.out.println();
+                            break;
+                        case 2:
+                            Magazine magazine = new Magazine(Catalogue.generateTotalPages(), Catalogue.generateYear(), Catalogue.generateTitle(), Catalogue.generateIsbn(), Magazine.generatePeriodicity());
+                            catalogue.add(magazine);
+                            System.out.println("Magazine successfully added.");
+                            System.out.println();
+                            break;
+                        default:
+                            System.out.println("Invalid choice, try again.");
+                            break;
+                    }
+                } else {
+                    return;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
+        }
+
     }
 
     public static void printCatalogueItemDetails(Catalogue item) {
@@ -170,26 +259,59 @@ public class Application {
 
 
     public static List<Catalogue> searchByPublicationYear() {
+        while (true) {
+            System.out.println("Insert the publication year of the book you wish to search: ");
+            System.out.println("If you want to stop the operation, type 0.");
+            try {
+                int userInput = scanner.nextInt();
 
-        System.out.println("Insert the publication year of the book you wish to search: ");
-        System.out.println("If you want to stop the operation, type 0.");
+                if (userInput == 0) {
+                    System.out.println("See you, space cowboy.");
+                    return null;
+                }
 
-        int userInput = scanner.nextInt();
+                List<Catalogue> matchingItems = catalogue.stream().filter(item -> item.getPublicationYear() == userInput).collect(Collectors.toList());
 
-        if (userInput == 0) {
-            System.out.println("See you, space cowboy.");
-            return null;
+                for (Catalogue item : matchingItems) {
+                    printCatalogueItemDetails(item);
+                    System.out.println();
+                }
+                return matchingItems;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
         }
-
-        List<Catalogue> matchingItems = new ArrayList<>();
-
-        matchingItems = catalogue.stream().filter(item -> item.getPublicationYear() == userInput).collect(Collectors.toList());
-
-        for (Catalogue item : matchingItems) {
-            printCatalogueItemDetails(item);
-            System.out.println();
-        }
-        return matchingItems;
     }
 
+
+    public static void searchByAuthor() {
+        while (true) {
+            System.out.println("Insert the author you wish to search: ");
+            System.out.println("If you want to stop the operation, type 'stop'.");
+
+            String searchedAuthor = scanner.nextLine();
+            if (searchedAuthor.equalsIgnoreCase("stop")) {
+                System.out.println("See you, space cowboy.");
+                break;
+            }
+
+            List<Catalogue> results = catalogue.stream()
+                    .filter(item -> item instanceof Book)
+                    .map(item -> (Book) item)
+                    .filter(book -> book.getAuthor().equalsIgnoreCase(searchedAuthor))
+                    .collect(Collectors.toList());
+
+            if (results.isEmpty()) {
+                System.out.println("No items found for this author. :(");
+            } else {
+                System.out.println("Items found for the author " + searchedAuthor + ":");
+                for (Catalogue item : results) {
+                    printCatalogueItemDetails(item);
+                    System.out.println();
+                }
+            }
+        }
+
+    }
 }
