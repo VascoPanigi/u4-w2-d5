@@ -1,0 +1,20 @@
+Book{author='Santos Waelchi', genre='Science fiction', totalPages=291, publicationYear=2023, title='Vanity Fair', isbn='1-06-332288-X'}
+Book{author='Mr. Anh Bergstrom', genre='Western', totalPages=1918, publicationYear=1996, title='A Confederacy of Dunces', isbn='1-686-60552-8'}
+Book{author='Cathie Feeney', genre='Historical fiction', totalPages=408, publicationYear=2012, title='Beneath the Bleeding', isbn='0-87739-111-4'}
+Book{author='Nicholas McClure', genre='Legend', totalPages=1092, publicationYear=1983, title='For a Breath I Tarry', isbn='0-06-763311-0'}
+Book{author='Lasonya Farrell', genre='Realistic fiction', totalPages=1661, publicationYear=1982, title='The Mirror Crack'd from Side to Side', isbn='0-504-74220-5'}
+Book{author='King Homenick IV', genre='Fantasy', totalPages=163, publicationYear=1989, title='Stranger in a Strange Land', isbn='1-86882-483-7'}
+Book{author='Bart Dare', genre='Crime/Detective', totalPages=83, publicationYear=2018, title='A Confederacy of Dunces', isbn='0-8197-5692-X'}
+Book{author='Aubrey Brown', genre='Reference book', totalPages=1335, publicationYear=2007, title='The Moving Finger', isbn='0-927912-05-8'}
+Book{author='Renee Miller', genre='Science fiction', totalPages=447, publicationYear=1950, title='East of Eden', isbn='0-938814-23-0'}
+Book{author='Dr. Lilliam Ryan', genre='Short story', totalPages=1106, publicationYear=2003, title='A Farewell to Arms', isbn='1-02-202480-9'}
+Magazine{periodicity=YEARLY, totalPages=1884, publicationYear=1997, title='The Golden Apples of the Sun', isbn='0-673-48064-X'}
+Magazine{periodicity=YEARLY, totalPages=1878, publicationYear=1992, title='East of Eden', isbn='1-06-188471-6'}
+Magazine{periodicity=MONTHLY, totalPages=1084, publicationYear=2013, title='Where Angels Fear to Tread', isbn='1-7133-3704-5'}
+Magazine{periodicity=WEEKLY, totalPages=89, publicationYear=1997, title='An Instant In The Wind', isbn='0-9507752-1-5'}
+Magazine{periodicity=MONTHLY, totalPages=1281, publicationYear=1976, title='Alone on a Wide, Wide Sea', isbn='1-85219-680-7'}
+Magazine{periodicity=WEEKLY, totalPages=394, publicationYear=1959, title='Dying of the Light', isbn='0-07-768866-X'}
+Magazine{periodicity=MONTHLY, totalPages=1263, publicationYear=1953, title='The Millstone', isbn='0-500-80535-0'}
+Magazine{periodicity=WEEKLY, totalPages=1361, publicationYear=1994, title='The Sun Also Rises', isbn='1-9729675-6-8'}
+Magazine{periodicity=MONTHLY, totalPages=1716, publicationYear=2003, title='Pale Kings and Princes', isbn='0-415-25566-X'}
+Magazine{periodicity=YEARLY, totalPages=531, publicationYear=1956, title='The Moon by Night', isbn='0-948208-12-0'}

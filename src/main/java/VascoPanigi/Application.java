@@ -4,7 +4,11 @@ package VascoPanigi;
 import VascoPanigi.entities.Book;
 import VascoPanigi.entities.Catalogue;
 import VascoPanigi.entities.Magazine;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,7 +26,7 @@ public class Application {
 
         while (true) {
             System.out.println("Which operation do you wish to perform?");
-            System.out.println("1-See our catalogue, 2-Generate an element, 3-remove with ISBN, 4-search with ISBN, 5-search for publication year, 6-search by author");
+            System.out.println("1-See our catalogue, 2-Generate an element, 3-remove with ISBN, 4-search with ISBN, 5-search for publication year, 6-search by author, 7-To save our catalogue in a file");
             System.out.println("Type 0 to exit.");
 
 
@@ -58,6 +62,8 @@ public class Application {
                         break;
                     case 6:
                         searchByAuthor();
+                    case 7:
+                        saveCatalogueToFile();
                     default:
                         System.out.println("Invalid choice, try again.");
                         break;
@@ -312,6 +318,24 @@ public class Application {
                 }
             }
         }
+    }
 
+    public static void saveCatalogueToFile() {
+        System.out.println("How do you want to name your file? ");
+        String fileName = scanner.nextLine();
+
+        File file = new File("src/catalogue.txt");
+        try {
+
+            for (Catalogue item : catalogue) {
+                if (item instanceof Book || item instanceof Magazine) {
+
+                    FileUtils.writeStringToFile(file, item + System.lineSeparator(), StandardCharsets.UTF_8, true);
+                }
+            }
+            System.out.println("Catalogue saved to " + fileName + " yippiee :D");
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving the catalogue to file: " + e.getMessage() + " :(");
+        }
     }
 }
