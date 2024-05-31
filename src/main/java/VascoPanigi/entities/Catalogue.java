@@ -69,4 +69,6 @@ public abstract class Catalogue {
     public void setPublicationYear(int publicationYear) {
         this.publicationYear = publicationYear;
     }
+
+
 }
